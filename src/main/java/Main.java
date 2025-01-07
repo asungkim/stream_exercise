@@ -1,9 +1,52 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class Main {
+
     public static void main(String[] args) {
-        exam4();
+
+    }
+
+    public static void exam7() {
+
+    }
+    public static void exam6() {
+        List<Person> people=new ArrayList<>();
+        people.add(new Person(1, "Alice", 20, 'F'));
+        people.add(new Person(2, "Bob", 25, 'M'));
+        people.add(new Person(3, "David", 35, 'M'));
+
+        // 남자 나이 합
+        int sum = people.stream()
+                .filter(p -> p.getGender() == 'M')
+                .mapToInt(p -> p.getAge())
+                .sum();
+        System.out.println(sum);
+
+        // 남자 나이 평균
+        double avg = people.stream()
+                .filter(p -> p.getGender() == 'M')
+                .mapToInt(p -> p.getAge())
+                .average()
+                .orElse(0);
+        System.out.println(avg);
+
+        // 남자 이름 출력
+        people.stream()
+                .filter(p->p.getGender()=='M')
+                .map(p->p.getName())
+                .forEach(System.out::println);
+    }
+
+
+    public static void exam5() {
+        int[] arr = {1, 2, 3, 4, 5}; // -> 1번,2번...
+
+        String[] strNums=Arrays.stream(arr).mapToObj(n->n+"번").toArray(String[]::new);
+
+        Arrays.stream(strNums).forEach(System.out::println);
     }
 
     public static void exam4() {
@@ -114,5 +157,36 @@ public class Main {
         if (num % 2 == 0) return true;
 
         return false;
+    }
+
+}
+
+class Person {
+    private int id;
+    private String name;
+    private int age;
+    private char gender;
+
+    public Person(int id, String name, int age, char gender) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public char getGender() {
+        return gender;
     }
 }
